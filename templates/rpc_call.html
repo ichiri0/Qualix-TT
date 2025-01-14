@@ -3,19 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JSON-RPC Client</title>
+    <title>RPC Call Result</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        pre {
+            background-color: #f8f8f8;
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
 </head>
 <body>
-    <h1>JSON-RPC Client</h1>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Call Method</button>
-    </form>
 
-    {% if result %}
-        <h2>Result:</h2>
-        <pre>{{ result|json_script:"rpc_result" }}</pre>
-    {% endif %}
+<h1>RPC Call Form</h1>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Submit</button>
+</form>
+
+{% if result %}
+    <h2>Result:</h2>
+
+    <table>
+        <tr>
+            <th>Key</th>
+            <th>Value</th>
+        </tr>
+        {% for key, value in result.items %}
+            <tr>
+                <td>{{ key }}</td>
+                <td>
+                    {{ value|safe }}
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+{% else %}
+    <p>No result to display.</p>
+{% endif %}
+
 </body>
 </html>

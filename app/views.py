@@ -4,7 +4,8 @@ from django.shortcuts import render
 
 from app.utils.web_client import JsonRpcClient
 from .forms import RpcCallForm
-from QualixTT import settings
+from django.conf import settings
+
 
 class RpcCallView(FormView):
     template_name = "rpc_call.html"
@@ -15,6 +16,7 @@ class RpcCallView(FormView):
         params = form.cleaned_data.get('params')
         client = JsonRpcClient(endpoint=settings.JSONRPC_ENDPOINT)
         result = client.call_method(method, params)
+        print(result)
         return render(self.request, self.template_name, {
             'form': form,
             'result': result
