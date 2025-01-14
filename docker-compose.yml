@@ -1,10 +1,6 @@
-version: '3.8'
-
 services:
-  web:
-    image: Dockerfile
-    command: python manage.py runserver 0.0.0.0:8000
-    volumes:
-      - .:/code
+  app:
+    build: .
     ports:
       - "8000:8000"
+    entrypoint: python manage.py runserver 0.0.0.0:8000
