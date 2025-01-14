@@ -9,13 +9,14 @@
 ### 1. Клонировать репозиторий
 
 ```bash
-git clone <ссылка на репозиторий>
-cd <папка проекта>
+git clone https://github.com/ichiri0/Qualix-TT.git
+cd Qualix-TT
 ```
 
 2. Создание и активация виртуального окружения (опционально)
 
-```python3 -m venv .venv
+```
+python3 -m venv .venv
 source .venv/bin/activate  # Для Windows используйте .venv\Scripts\activate
 ```
 
