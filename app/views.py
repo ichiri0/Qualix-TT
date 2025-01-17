@@ -12,12 +12,11 @@ class RpcCallView(FormView):
     form_class = RpcCallForm
 
     def form_valid(self, form: Form):
-        method = form.cleaned_data['method']
-        params = form.cleaned_data.get('params')
+        method = form.cleaned_data["method"]
+        params = form.cleaned_data.get("params")
         client = JsonRpcClient(endpoint=settings.JSONRPC_ENDPOINT)
         result = client.call_method(method, params)
         print(result)
-        return render(self.request, self.template_name, {
-            'form': form,
-            'result': result
-        })
+        return render(
+            self.request, self.template_name, {"form": form, "result": result}
+        )
